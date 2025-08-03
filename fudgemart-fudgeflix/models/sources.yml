@@ -1,0 +1,61 @@
+version: 2
+
+sources:
+  - name: fudgemart_v3
+    database: raw
+    schema: fudgemart_v3
+
+    tables:
+      - name: fm_customers
+        columns:
+          - name: customer_id
+            tests:
+              - unique
+      - name: fm_customer_product_reviews
+        tests:
+        - dbt_utils.unique_combination_of_columns:
+            combination_of_columns:
+              - customer_id
+              - product_id
+      - name: fm_departments_lookup
+        columns:
+          - name: department_id
+            tests:
+              - unique
+      - name: fm_products
+        columns:
+          - name: product_id
+            tests:
+              - unique
+  - name: fudgeflix_v3
+    database: raw
+    schema: fudgeflix_v3
+
+    tables:
+      - name: ff_accounts
+        columns:
+          - name: account_id
+            tests:
+              - unique
+      - name: ff_genres
+        columns:
+          - name: genre_name
+            tests:
+              - unique        
+      - name: ff_titles
+        columns:
+          - name: title_id
+            tests:
+              - unique        
+      - name: ff_title_genres
+        tests:
+        - dbt_utils.unique_combination_of_columns:
+            combination_of_columns:
+              - tg_genre_name
+              - tg_title_id                                                
+      - name: ff_account_titles
+        tests:
+        - dbt_utils.unique_combination_of_columns:
+            combination_of_columns:
+              - at_account_id
+              - at_title_id

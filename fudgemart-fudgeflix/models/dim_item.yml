@@ -1,0 +1,29 @@
+version: 2
+
+models:
+  - name: dim_item
+    description: >
+      Dimension table. One row per item (product or title). 
+      Used to analyze ratings by item.
+    columns:
+      - name: item_id
+        description: Surrogate key generated from item ID and source
+        tests:
+          - not_null
+          - unique
+
+      - name: source_item_id
+        description: Original product_id or title_id
+        tests:
+          - not_null
+
+      - name: item_name
+        description: Name of the product or title
+
+      - name: item_source
+        description: Indicates whether the item is from 'FudgeMart' or 'FudgeFlix'
+        tests:
+          - not_null
+
+      - name: item_type
+        description: Department (for product) or title type (for title)
