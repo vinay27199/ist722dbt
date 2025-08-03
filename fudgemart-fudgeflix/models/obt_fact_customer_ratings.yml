@@ -1,0 +1,26 @@
+version: 2
+
+models:
+  - name: obt_fact_customer_ratings
+    description: >
+      A unified table combining customer ratings with customer and item dimensions 
+      from both FudgeMart and FudgeFlix platforms.
+    columns:
+      - name: customer_id
+        description: Unique identifier for a customer across sources.
+      - name: customer_name
+        description: Full name of the customer.
+      - name: customer_email
+        description: Email address of the customer.
+      - name: customer_location
+        description: Customer's location based on ZIP code.
+      - name: item_id
+        description: Unique identifier for an item across sources.
+      - name: item_name
+        description: Name of the item or title.
+      - name: item_type
+        description: Type or category of the item (title type or department ID).
+      - name: item_source
+        description: Source system of the item - FudgeFlix or FudgeMart.
+      - name: rating
+        description: Rating provided by the customer for the item.
