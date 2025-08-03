@@ -1,0 +1,27 @@
+version: 2
+
+models:
+  - name: fact_customer_ratings
+    description: >
+      This is a transactional fact table capturing individual customer ratings on items (products or titles) 
+      from FudgeMart and FudgeFlix. The grain is: “One row per customer’s rating on an item per date per source.”
+      Each row represents a unique rating action.
+    columns:
+      - name: customer_id
+        description: Refers to the customer giving the rating
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_customer')
+              field: customer_id
+
+      - name: item_id
+        description: Refers to the item (product or title) being rated
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_item')
+              field: item_id
+
+      - name: rating
+        description: Numeric rating (e.g., 1 to 5 stars)

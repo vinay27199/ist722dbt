@@ -1,0 +1,27 @@
+version: 2
+
+models:
+  - name: dim_customer
+    description: >
+      Customer Dimension table with one row per customer (from either FudgeMart or FudgeFlix).
+      Used for customer-level analytics and joining to ratings.
+    columns:
+      - name: customer_id
+        description: Surrogate key for internal use
+        tests:
+          - not_null
+          - unique
+      - name: source_customer_id
+        description: Customer ID from source system
+        tests:
+          - not_null
+      - name: source_system
+        description: Name of source system FudgeMart or FudgeFlix
+        tests:
+          - not_null
+      - name: full_name
+        description: Full customer name (first name + last name)
+      - name: email
+        description: Customer email
+      - name: location
+        description: Customer's zip code
